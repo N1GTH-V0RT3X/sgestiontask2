@@ -1,3 +1,161 @@
+# NodeJS 
+
+Para instalar y ejecutar servidor ejecutar cmd en posición del archivo:
+
+
+npm install
+npm run dev
+
+La API quedará en:
+
+http://localhost:3000
+
+
+1. Obtener todas las tareas
+
+Endpoint
+
+GET /tasks
+
+Ejemplo
+
+fetch("http://localhost:3001/tasks")
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+Respuesta
+
+[
+  {
+    "id": 1,
+    "title": "Ejemplo",
+    "description": "Texto",
+    "completed": false,
+    "date": "",
+    "comments": "",
+    "tags": [],
+    "createdAt": "...",
+    "updatedAt": "..."
+  }
+]
+2. Obtener una tarea por ID
+
+Endpoint
+
+GET /tasks/:id
+
+Ejemplo
+
+fetch("http://localhost:3001/tasks/1")
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+Errores
+
+400 → ID inválido
+404 → No existe
+3. Crear tarea
+
+Endpoint
+
+POST /tasks
+
+Body (JSON)
+
+{
+  "title": "Nueva tarea",
+  "description": "Descripción opcional",
+  "completed": false,
+  "date": "",
+  "comments": "",
+  "tags": ["tag1", "tag2"]
+}
+
+Ejemplo
+
+fetch("http://localhost:3001/tasks", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    title: "Aprender Node",
+    description: "Backend básico",
+    tags: ["backend"]
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));
+
+Respuesta
+
+{
+  "message": "Tarea creada correctamente.",
+  "task": { ... }
+}
+4. Actualizar tarea
+
+Endpoint
+
+PUT /tasks/:id
+
+Body (JSON)
+
+{
+  "title": "Nuevo título",
+  "description": "Nueva descripción",
+  "completed": true,
+  "date": "",
+  "comments": "",
+  "tags": ["actualizado"]
+}
+
+Ejemplo
+
+fetch("http://localhost:3001/tasks/1", {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    completed: true
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data));
+5. Eliminar tarea
+
+Endpoint
+
+DELETE /tasks/:id
+
+Ejemplo
+
+fetch("http://localhost:3001/tasks/1", {
+  method: "DELETE"
+})
+.then(res => res.json())
+.then(data => console.log(data));
+
+Respuesta
+
+{
+  "message": "Tarea eliminada correctamente.",
+  "task": { ... }
+}
+6. Verificar API
+
+Endpoint
+
+GET /
+
+Ejemplo
+
+fetch("http://localhost:3001/")
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
